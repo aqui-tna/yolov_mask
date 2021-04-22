@@ -1,0 +1,387 @@
+{
+  "name": "Kev1nZheng/yolov_mask",
+  "url": "https://github.com/aqui-tna/yolov_mask",
+  "python_version": "3.7",
+  "requirements": {
+    "req_file": "requirements.txt",
+    "pip": [
+      "torch"
+    ],
+    "others": [
+      "tar"
+    ]
+  },
+  "to_run": {
+      "decision": true,
+      "reason": ""
+  },
+  "entries": [
+      {
+        "cmd": "python3 train.py",
+        "main": "train.py",
+        "steps": [
+            "data-preparation or training or testing or data-preprocessing or anything else"
+        ],
+        "args_lib": "argparse",
+        "args": [
+          {
+              "names": [
+                  "----epochs"
+              ],
+              "input": true,
+              "dest": "--epochs",
+              "ex_has_default": false,
+              "default": "type=int",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----batch-size"
+              ],
+              "input": true,
+              "dest": "--batch-size",
+              "ex_has_default": false,
+              "default": "type=int",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----accumulate"
+              ],
+              "input": true,
+              "dest": "--accumulate",
+              "ex_has_default": false,
+              "default": "type=int",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----cfg"
+              ],
+              "input": true,
+              "dest": "--cfg",
+              "ex_has_default": false,
+              "default": "type=str",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----data-cfg"
+              ],
+              "input": true,
+              "dest": "--data-cfg",
+              "ex_has_default": false,
+              "default": "type=str",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----multi-scale"
+              ],
+              "input": true,
+              "dest": "--multi-scale",
+              "ex_has_default": false,
+              "default": "action=store_true",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----img-size"
+              ],
+              "input": true,
+              "dest": "--img-size",
+              "ex_has_default": false,
+              "default": "type=int",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----resume"
+              ],
+              "input": true,
+              "dest": "--resume",
+              "ex_has_default": false,
+              "default": "action=store_true",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----transfer"
+              ],
+              "input": true,
+              "dest": "--transfer",
+              "ex_has_default": false,
+              "default": "action=store_true",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----num-workers"
+              ],
+              "input": true,
+              "dest": "--num-workers",
+              "ex_has_default": false,
+              "default": "type=int",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----dist-url"
+              ],
+              "input": true,
+              "dest": "--dist-url",
+              "ex_has_default": false,
+              "default": "default=tcp://127.0.0.1:9999",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----rank"
+              ],
+              "input": true,
+              "dest": "--rank",
+              "ex_has_default": false,
+              "default": "default=0",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----world-size"
+              ],
+              "input": true,
+              "dest": "--world-size",
+              "ex_has_default": false,
+              "default": "default=1",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----backend"
+              ],
+              "input": true,
+              "dest": "--backend",
+              "ex_has_default": false,
+              "default": "default=nccl",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----nosave"
+              ],
+              "input": true,
+              "dest": "--nosave",
+              "ex_has_default": false,
+              "default": "action=store_true",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----notest"
+              ],
+              "input": true,
+              "dest": "--notest",
+              "ex_has_default": false,
+              "default": "action=store_true",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----evolve"
+              ],
+              "input": true,
+              "dest": "--evolve",
+              "ex_has_default": false,
+              "default": "action=store_true",
+              "type": "str",
+              "mandatory": false
+          },
+          {
+              "names": [
+                  "----var"
+              ],
+              "input": true,
+              "dest": "--var",
+              "ex_has_default": false,
+              "default": "default=0",
+              "type": "str",
+              "mandatory": false
+          }
+      ],
+        "ins": [
+            {
+            "type": "file",
+            "location": "weights/latest.pt",
+            "artifact": "dataset",
+            "ex_from": "conf",
+            "ex_in_repo": true
+            }
+        ],
+        "outs": [
+            {
+                "type": "dir",
+                "location": "/data",
+                "artifact": "metrics",
+                "ex_from": "",
+                "ex_in_repo": true
+            }
+        ]
+        },
+        {
+          "cmd": "python3 detect.py",
+          "main": "detect.py",
+          "steps": [
+              "Image Augmentation for data detection"
+          ],
+          "args_lib": "argparse",
+          "args": [
+            {
+                "names": [
+                    "----cfg"
+                ],
+                "input": true,
+                "dest": "--cfg",
+                "ex_has_default": false,
+                "default": "type=str",
+                "type": "str",
+                "mandatory": false
+            },
+            {
+                "names": [
+                    "----data-cfg"
+                ],
+                "input": true,
+                "dest": "--data-cfg",
+                "ex_has_default": false,
+                "default": "type=str",
+                "type": "str",
+                "mandatory": false
+            },
+            {
+                "names": [
+                    "----weights"
+                ],
+                "input": true,
+                "dest": "--weights",
+                "ex_has_default": false,
+                "default": "type=str",
+                "type": "str",
+                "mandatory": false
+            },
+            {
+                "names": [
+                    "----images"
+                ],
+                "input": true,
+                "dest": "--images",
+                "ex_has_default": false,
+                "default": "type=str",
+                "type": "str",
+                "mandatory": false
+            },
+            {
+                "names": [
+                    "----img-size"
+                ],
+                "input": true,
+                "dest": "--img-size",
+                "ex_has_default": false,
+                "default": "type=int",
+                "type": "str",
+                "mandatory": false
+            },
+            {
+                "names": [
+                    "----conf-thres"
+                ],
+                "input": true,
+                "dest": "--conf-thres",
+                "ex_has_default": false,
+                "default": "type=float",
+                "type": "str",
+                "mandatory": false
+            },
+            {
+                "names": [
+                    "----nms-thres"
+                ],
+                "input": true,
+                "dest": "--nms-thres",
+                "ex_has_default": false,
+                "default": "type=float",
+                "type": "str",
+                "mandatory": false
+            }
+        ],
+          "ins": [
+              {
+              "type": "file",
+              "location": "cfg/yolov3.cfg",
+              "artifact": "conf",
+              "ex_from": "conf",
+              "ex_in_repo": true
+              }
+          ],
+          "outs": [
+              {
+                  "type": "file",
+                  "location": "weights/yolov3.weights",
+                  "artifact": "dataset",
+                  "ex_from": "conf",
+                  "ex_in_repo": true
+              }
+          ]
+          }
+    ],
+  "ex_metrics": {
+    "metrics_files": [
+        {
+            "file_name": "",
+            "metrics": []
+                  }
+    ],
+    "prints": []
+    ,
+    "plots": [],
+    "others": [
+        {
+            "name": "train",
+            "in_repo": "true",
+            "metrics": ["imgs.shape","targets.shape","gt_mask.shape"]
+        }
+    ]
+  },
+  "ex_hyperparams": {
+    "from_cmd": [],
+    "config_files": [
+        {
+            "name": "",
+            "in_repo": "false",
+            "hyperparams": [""]
+        }
+    ],
+    "in_code": [
+      "'k','xy','wh','cls','conf','iou_t','lr0','lrf','momentum','weight_decay'"],
+    "others": [
+        {
+            "name": "train",
+            "metrics": ["imgs.shape","targets.shape","gt_mask.shape"]
+        }
+    ]
+  }
+}
